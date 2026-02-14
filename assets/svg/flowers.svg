@@ -1,0 +1,14 @@
+<svg class="flower" viewBox="0 0 200 300">
+  <g class="stem">
+    <path d="M100 300 C95 200 105 100 100 0" />
+  </g>
+
+  <g class="petals">
+    <ellipse cx="100" cy="80" rx="18" ry="40" />
+    <ellipse cx="100" cy="80" rx="18" ry="40" transform="rotate(45 100 80)" />
+    <ellipse cx="100" cy="80" rx="18" ry="40" transform="rotate(90 100 80)" />
+    <ellipse cx="100" cy="80" rx="18" ry="40" transform="rotate(135 100 80)" />
+  </g>
+
+  <circle class="core" cx="100" cy="80" r="10" />
+</svg>

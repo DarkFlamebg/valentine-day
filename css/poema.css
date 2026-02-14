@@ -1,0 +1,619 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  /* --romantic-pink: #ff6b9d;
+  --soft-pink: #ff8fab;
+  --light-pink: #ffb3d9;
+  --deep-pink: #c44569;
+  --cream: #fff5f7;
+  --white: #ffffff; */
+
+:root {
+  /* Colores románticos */
+  --neon-pink: #ff0080;
+  --neon-purple: #bf00ff;
+  --neon-blue: #00d4ff;
+  --neon-violet: #d946ff;
+  --electric-pink: #ff1b8d;
+  --cyber-purple: #8b00ff;
+  /* Rojos románticos / vino */
+  --rose-red: #c1121f;        /* rojo elegante */
+  --wine-red: #7a1025;        /* rojo vino profundo */
+  --crimson-glow: #b11226;    /* rojo pasión */
+  --burgundy: #4a0e1a;        /* vino oscuro */
+  --soft-rose: #f4c2c2;       /* rosa romántico suave */
+  --red-shadow: rgba(122,16,37,0.45);
+  /* Fondos */
+  --bg-dark: #fff5f7;
+  --bg-darker: #ffffff;
+  
+  /* Tipografía */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  
+  /* Sombras */
+  --shadow-card: 0 10px 40px rgba(255, 107, 157, 0.3);
+  --shadow-hover: 0 20px 60px rgba(255, 107, 157, 0.4);
+  --shadow-popup: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+   BODY Y ESCENA PRINCIPAL
+   =================================== */
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: 
+    radial-gradient(ellipse at top, rgba(191, 0, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #0d001a 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Grid cyberpunk de fondo */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 0, 128, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(191, 0, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridPulse 4s ease-in-out infinite;
+}
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.poems-scene {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===================================
+   CORAZONES FLOTANTES DE FONDO
+   =================================== */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.3;
+  animation: floatHeart 15s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+  0%, 100% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-20vh) translateX(50vw) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ===================================
+   CONTENEDOR PRINCIPAL
+   =================================== */
+.poems-container {
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.main-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: transparent;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(
+    135deg,
+    var(--rose-red) 0%,
+    var(--wine-red) 50%,
+    var(--rose-red) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInDown 1s ease-out, gradientFlow 6s ease infinite;
+  filter: drop-shadow(var(--soft-rose));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+}
+.main-title::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--wine-red);
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 4rem;
+  opacity: 0.95;
+  animation: fadeInDown 1s 0.2s ease-out backwards;
+  text-shadow: var(--glow-blue);
+  letter-spacing: 0.05em;
+}
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+/* ===================================
+   GRID DE CARDS
+   =================================== */
+.poems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+/* ===================================
+   POEM CARDS
+   =================================== */
+.poem-card {
+  background: rgba(255, 255, 255, 0.425);
+  
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.8s ease-out backwards;
+}
+
+.poem-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid;
+  border-image: linear-gradient(
+    135deg,
+    var(--neon-pink),
+    var(--soft-rose),
+    var(--soft-rose)
+  ) 1;
+  opacity: 0.4;
+  transition: opacity 0.5s ease;
+}
+.poem-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    135deg,
+    var(--neon-pink),
+    var(--soft-rose),
+    var(--soft-rose)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  
+}
+.poem-card:nth-child(1) { animation-delay: 0.1s; }
+.poem-card:nth-child(2) { animation-delay: 0.2s; }
+.poem-card:nth-child(3) { animation-delay: 0.3s; }
+.poem-card:nth-child(4) { animation-delay: 0.4s; }
+.poem-card:nth-child(5) { animation-delay: 0.5s; }
+.poem-card:nth-child(6) { animation-delay: 0.6s; }
+
+.poem-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--romantic-pink);
+}
+.poem-card:hover::before {
+  opacity: 1;
+  filter: drop-shadow(var(--glow-pink));
+}
+
+.poem-card:hover::after {
+  opacity: 0.6;
+}
+.poem-card:hover .card-shine {
+  transform: translateX(100%) translateY(-100%);
+  opacity: 0.8;
+}
+
+.card-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.card-preview {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Brillo que pasa por la card */
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) translateY(100%);
+  transition: all 0.8s ease;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* ===================================
+   POPUP MODAL
+   =================================== */
+.poem-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.poem-popup.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  
+  cursor: pointer;
+}
+
+.popup-content {
+  position: relative;
+  max-width: 700px;
+  width: 90%;
+  max-height: 85vh;
+  background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+  border-radius: 30px;
+  padding: 3rem 2.5rem;
+  box-shadow: var(--shadow-popup);
+  overflow-y: auto;
+  transform: scale(0.7) rotateX(45deg);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 3px solid var(--romantic-pink);
+}
+
+.poem-popup.active .popup-content {
+  transform: scale(1) rotateX(0deg);
+  opacity: 1;
+}
+
+.popup-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 107, 157, 0.1);
+  border: 2px solid var(--romantic-pink);
+  color: var(--romantic-pink);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+}
+
+.popup-close:hover {
+  background: var(--romantic-pink);
+  color: white;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.popup-icon {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+}
+
+.popup-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--deep-pink);
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s backwards;
+}
+
+.popup-body {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  line-height: 2.2;
+  color: #4a2545;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.8s ease-out 0.5s backwards;
+}
+
+.popup-body p {
+  margin-bottom: 1rem;
+}
+
+.popup-body .verse {
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+
+/* Corazones decorativos en popup */
+.popup-hearts {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.popup-heart {
+  font-size: 2rem;
+  animation: heartBeat 1.5s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.popup-heart:nth-child(1) { animation-delay: 0s; }
+.popup-heart:nth-child(2) { animation-delay: 0.3s; }
+.popup-heart:nth-child(3) { animation-delay: 0.6s; }
+
+/* ===================================
+   BOTÓN VOLVER
+   =================================== */
+.back-btn {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 107, 157, 0.4);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--deep-pink);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  font-weight: bold;
+}
+
+.back-btn:hover {
+  background: white;
+  border-color: var(--romantic-pink);
+  transform: translateX(-5px) scale(1.05);
+  box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+}
+
+/* ===================================
+   ANIMACIONES
+   =================================== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* ===================================
+   SCROLLBAR PERSONALIZADO
+   =================================== */
+.popup-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background: rgba(255, 107, 157, 0.1);
+  border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background: var(--romantic-pink);
+  border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+  background: var(--deep-pink);
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (max-width: 768px) {
+  .poems-scene {
+    padding: 3rem 1rem;
+  }
+  
+  .poems-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .popup-content {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .popup-title {
+    font-size: 2rem;
+  }
+  
+  .popup-body {
+    font-size: 1.2rem;
+    line-height: 2;
+  }
+  
+  .back-btn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+}

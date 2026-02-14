@@ -1,0 +1,524 @@
+/* ===================================
+   RESET Y BASE
+   =================================== */
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  /* Paleta Neón Romántica */
+  --neon-pink: #ff0080;
+  --neon-purple: #bf00ff;
+  --neon-blue: #00d4ff;
+  --neon-violet: #d946ff;
+  --electric-pink: #ff1b8d;
+  --cyber-purple: #8b00ff;
+  
+  /* Fondos */
+  --bg-dark: #0a0015;
+  --bg-darker: #050008;
+  --bg-glow: rgba(255, 0, 128, 0.1);
+  
+  /* Sombras neón */
+  --glow-pink: 0 0 20px rgba(255, 0, 128, 0.6),
+               0 0 40px rgba(255, 0, 128, 0.4),
+               0 0 60px rgba(255, 0, 128, 0.2);
+  --glow-purple: 0 0 20px rgba(191, 0, 255, 0.6),
+                 0 0 40px rgba(191, 0, 255, 0.4),
+                 0 0 60px rgba(191, 0, 255, 0.2);
+  --glow-blue: 0 0 20px rgba(0, 212, 255, 0.6),
+               0 0 40px rgba(0, 212, 255, 0.4);
+}
+body {
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  background: 
+    radial-gradient(ellipse at top, rgba(191, 0, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #0d001a 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  color: #fff;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 0, 128, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(191, 0, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 0, 128, 0.1) 0%, transparent 3%),
+    radial-gradient(circle at 100% 70%, rgba(191, 0, 255, 0.1) 0%, transparent 3%),
+    radial-gradient(circle at 80% 70%, rgba(191, 0, 255, 0.1) 0%, transparent 3%),
+    radial-gradient(circle at 80% 70%, rgba(191, 0, 255, 0.1) 0%, transparent 3%),
+    radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 3%),
+    radial-gradient(circle at 70% 20%, rgba(217, 70, 255, 0.08) 0%, transparent 3%);
+  animation: particleFloat 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes particleFloat {
+  0%, 100% { transform: translate(0, 0); opacity: 0.6; }
+  33% { transform: translate(20px, -30px); opacity: 0.8; }
+  66% { transform: translate(-15px, 20px); opacity: 0.7; }
+}
+
+/* ===================================
+   CANVAS DEL CORAZÓN INTERACTIVO
+   =================================== */
+#heartCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ===================================
+   SECCIONES
+   =================================== */
+.section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  z-index: 10;
+  padding: 2rem;
+}
+
+.section.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+.hero-ui {
+  text-align: center;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+/* Efecto de escaneo cyberpunk */
+.hero-ui::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    transparent 40%, 
+    rgba(255, 0, 128, 0.05) 50%, 
+    transparent 60%
+  );
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, #ff69b4, #ff6b9d, #c44569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.hero-ui button,
+.btn {
+  position: relative;
+  padding: 1.2rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 2px solid var(--neon-pink);
+  background: rgba(255, 0, 128, 0.05);
+  color: #FFFFFF;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  min-width: 280px;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 0, 128, 0.1),
+    0 0 20px rgba(255, 0, 128, 0.3);
+}
+.hero-ui button::before,
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 0, 128, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+.hero-ui button:hover::before,
+.btn:hover::before {
+  left: 100%;
+}
+.hero-ui button:hover,
+.btn:hover {
+  background: rgba(255, 0, 128, 0.2);
+  border-color: var(--neon-pink);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 0, 128, 0.2),
+    var(--glow-pink),
+    0 10px 40px rgba(255, 0, 128, 0.4);
+  color: #fff;
+}
+
+.hero-ui button:active,
+.btn:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.btn-poems {
+  border-color: var(--neon-purple);
+  color: var(--neon-purple);
+  box-shadow: 
+    inset 0 0 20px rgba(191, 0, 255, 0.1),
+    0 0 20px rgba(191, 0, 255, 0.3);
+}
+
+.btn-poems:hover {
+  background: rgba(191, 0, 255, 0.2);
+  border-color: var(--neon-purple);
+  box-shadow: 
+    inset 0 0 30px rgba(191, 0, 255, 0.2),
+    var(--glow-purple),
+    0 10px 40px rgba(191, 0, 255, 0.4);
+}
+
+.btn-poems {
+  border-color: var(--neon-blue);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 128, 0.2),
+    rgba(0, 212, 255, 0.2)
+  );
+  color: #fff;
+  box-shadow: 
+    inset 0 0 30px rgba(0, 212, 255, 0.2),
+    var(--glow-blue);
+  animation: borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0%, 100% { 
+    border-color: var(--neon-blue);
+    box-shadow: 
+      inset 0 0 30px rgba(0, 212, 255, 0.2),
+      var(--glow-blue);
+  }
+  50% { 
+    border-color: var(--neon-pink);
+    box-shadow: 
+      inset 0 0 30px rgba(255, 0, 128, 0.2),
+      var(--glow-pink);
+  }
+}
+
+.btn-special:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 128, 0.4),
+    rgba(0, 212, 255, 0.4)
+  );
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    inset 0 0 40px rgba(255, 255, 255, 0.1),
+    0 0 30px rgba(255, 0, 128, 0.6),
+    0 0 50px rgba(0, 212, 255, 0.6),
+    0 15px 50px rgba(255, 0, 128, 0.5);
+  animation: none;
+}
+
+
+/* ===================================
+   BOTÓN DE REGRESO
+   =================================== */
+.btn-back {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.1em;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 0, 128, 0.1),
+    0 0 15px rgba(255, 0, 128, 0.3);
+  text-transform: uppercase;
+}
+
+.btn-back:hover {
+  background: rgba(255, 0, 128, 0.2);
+  transform: translateX(-5px);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 0, 128, 0.2),
+    var(--glow-pink);
+  color: #fff;
+}
+
+/* ===================================
+   SECCIÓN DE PENSAMIENTOS
+   =================================== */
+.thoughts-container {
+  max-width: 1400px;
+  width: 100%;
+  position: relative;
+}
+
+.thoughts-container h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  margin-bottom: 4rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+  filter: drop-shadow(var(--glow-pink));
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.thoughts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.thought-card {
+  padding: 2.5rem;
+  background: rgba(10, 0, 21, 0.6);
+  backdrop-filter: blur(20px);
+  border: 2px solid transparent;
+  border-radius: 0;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: slideIn 0.6s ease forwards;
+  overflow: hidden;
+}
+
+.thought-card:nth-child(1) { animation-delay: 0.1s; }
+.thought-card:nth-child(2) { animation-delay: 0.2s; }
+.thought-card:nth-child(3) { animation-delay: 0.3s; }
+.thought-card:nth-child(4) { animation-delay: 0.4s; }
+
+.thought-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+}
+
+.thought-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ff69b4;
+}
+
+.thought-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.thought-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 0, 128, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+/* ===================================
+   ANIMACIONES
+   =================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
+  }
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+  
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 0.95rem;
+    min-width: 280px;
+  }
+  
+  .poem-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .poem-container h2,
+  .thoughts-container h2 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  
+  .poem-verses span {
+    font-size: 1.1rem;
+  }
+  
+  .thoughts-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .thought-card {
+    padding: 2rem;
+  }
+  
+  .thought-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .thought-card p {
+    font-size: 1rem;
+  }
+  
+  .btn-back {
+    top: 1.5rem;
+    left: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn {
+    min-width: 240px;
+    padding: 0.9rem 1.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .poem-container h2,
+  .thoughts-container h2 {
+    font-size: 2rem;
+  }
+  
+  .thought-card {
+    padding: 1.5rem;
+  }
+  
+  .thought-card h3 {
+    font-size: 1.3rem;
+  }
+}

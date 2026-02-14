@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poemas Para Ti 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/poema.css">
+</head>
+<body>
+  
+  <button class="back-btn" onclick="window.history.back()">← Volver</button>
+  
+  <div class="poems-scene">
+    <!-- Corazones flotantes de fondo -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="poems-container">
+      <h1 class="main-title">Palabras del Corazón</h1>
+      <p class="subtitle">Cada poema es un latido que te pertenece</p>
+      
+      <div class="poems-grid">
+        
+        <!-- Card 1 -->
+        <div class="poem-card" data-poem="1">
+          <div class="card-icon">💕</div>
+          <h3 class="card-title">Tu Sonrisa</h3>
+          <p class="card-preview">En tus ojos encuentro constelaciones...</p>
+          <div class="card-shine"></div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="poem-card" data-poem="2">
+          <div class="card-icon">🌹</div>
+          <h3 class="card-title">Como una Rosa</h3>
+          <p class="card-preview">Eres el jardín donde mi alma florece...</p>
+          <div class="card-shine"></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="poem-card" data-poem="3">
+          <div class="card-icon">✨</div>
+          <h3 class="card-title">Eternidad</h3>
+          <p class="card-preview">En cada instante contigo, el tiempo se detiene...</p>
+          <div class="card-shine"></div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="poem-card" data-poem="4">
+          <div class="card-icon">💝</div>
+          <h3 class="card-title">Mi Universo</h3>
+          <p class="card-preview">Eres la estrella que ilumina mis noches...</p>
+          <div class="card-shine"></div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="poem-card" data-poem="5">
+          <div class="card-icon">🦋</div>
+          <h3 class="card-title">Mariposas</h3>
+          <p class="card-preview">En mi pecho revolotean mil alas...</p>
+          <div class="card-shine"></div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="poem-card" data-poem="6">
+          <div class="card-icon">🌙</div>
+          <h3 class="card-title">Luna y Mar</h3>
+          <p class="card-preview">Como la luna al mar, me atraes...</p>
+          <div class="card-shine"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="poem-popup" id="poemPopup">
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup-content">
+      <button class="popup-close" id="popupClose">×</button>
+      <div class="popup-icon" id="popupIcon">💕</div>
+      <h2 class="popup-title" id="popupTitle">Título del Poema</h2>
+      <div class="popup-body" id="popupBody">
+        <!-- El poema se cargará aquí -->
+      </div>
+      <div class="popup-hearts">
+        <span class="popup-heart">❤️</span>
+        <span class="popup-heart">💕</span>
+        <span class="popup-heart">💖</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/poema.js"></script>
+</body>
+</html>
