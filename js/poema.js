@@ -93,7 +93,37 @@ const poemas = {
       <p class="verse">Y así como el mar necesita la luna,</p>
       <p class="verse">yo te necesito a ti, mi fortuna.</p>
     `
+  },
+  7: {
+    icon: '📩',
+    title: 'Ábrelo cuando dejemos de hablar',
+    content: `
+      <p class="verse">Si un día el silencio se instala entre nosotros,</p>
+      <p class="verse">y las palabras ya no cruzan el puente,</p>
+      <p class="verse">abre esto.</p>
+      <br>
+      <p class="verse">No para buscar culpables,</p>
+      <p class="verse">ni para reescribir lo que fue,</p>
+      <p class="verse">sino para recordar que existimos</p>
+      <p class="verse">de una manera que fue verdadera.</p>
+      <br>
+      <p class="verse">Me gustaste incluso en los días simples,</p>
+      <p class="verse">en las conversaciones sin importancia,</p>
+      <p class="verse">en los silencios compartidos</p>
+      <p class="verse">que decían más que cualquier promesa.</p>
+      <br>
+      <p class="verse">Si dejamos de hablar,</p>
+      <p class="verse">quiero que sepas que no fue indiferencia.</p>
+      <p class="verse">Fue miedo, fue tiempo, fue destino...</p>
+      <p class="verse">pero nunca fue falta de sentir.</p>
+      <br>
+      <p class="verse">Y si alguna vez dudas,</p>
+      <p class="verse">recuerda que hubo alguien</p>
+      <p class="verse">que te miró como quien encuentra algo</p>
+      <p class="verse">que no se repite dos veces en la vida.</p>
+    `
   }
+
 };
 
 // ===================================
@@ -128,6 +158,10 @@ function openPoem(poemId) {
   
   // Crear corazones flotantes
   createPopupHearts();
+  if (poemId === "7") {
+  poemPopup.classList.add('special-poem');
+}
+
 }
 
 // Cerrar popup

@@ -4,7 +4,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-  /* --romantic-pink: #ff6b9d;
+  /* 
   --soft-pink: #ff8fab;
   --light-pink: #ffb3d9;
   --deep-pink: #c44569;
@@ -25,7 +25,12 @@
   --crimson-glow: #b11226;    /* rojo pasión */
   --burgundy: #4a0e1a;        /* vino oscuro */
   --soft-rose: #f4c2c2;       /* rosa romántico suave */
+  /*Colores que ya estaban*/
+  --romantic-pink: #ff6b9d;
   --red-shadow: rgba(122,16,37,0.45);
+  --deep-pink: #c44569;
+  --cream: #fff5f7;
+  --deep-pink: #c44569;
   /* Fondos */
   --bg-dark: #fff5f7;
   --bg-darker: #ffffff;
@@ -274,10 +279,10 @@ body::before {
 }
 
 .card-icon {
-  font-size: 3rem;
+  font-size: 4rem;
   text-align: center;
-  margin-bottom: 1rem;
-  animation: pulse 2s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+  animation: iconFloat 3s ease-in-out infinite;
 }
 
 .card-title {
@@ -286,15 +291,16 @@ body::before {
   color: var(--deep-pink);
   text-align: center;
   margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
 .card-preview {
   font-family: var(--font-body);
   font-size: 1.1rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-style: italic;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 /* Brillo que pasa por la card */
@@ -346,15 +352,14 @@ body::before {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  
   cursor: pointer;
 }
 
 .popup-content {
   position: relative;
   max-width: 700px;
-  width: 90%;
-  max-height: 85vh;
+  width: 80%;
+  max-height: 75vh;
   background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
   border-radius: 30px;
   padding: 3rem 2.5rem;
@@ -393,7 +398,7 @@ body::before {
 
 .popup-close:hover {
   background: var(--romantic-pink);
-  color: white;
+  color: #fff;
   transform: rotate(90deg) scale(1.1);
 }
 
@@ -401,7 +406,9 @@ body::before {
   font-size: 4rem;
   text-align: center;
   margin-bottom: 1.5rem;
-  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards,
+  iconPulse 3s ease-in-out 1s infinite;;
+  
 }
 
 .popup-title {
@@ -424,7 +431,7 @@ body::before {
 }
 
 .popup-body p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .popup-body .verse {
@@ -436,12 +443,12 @@ body::before {
 .popup-hearts {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .popup-heart {
-  font-size: 2rem;
+  font-size: 2.5rem;
   animation: heartBeat 1.5s ease-in-out infinite;
   opacity: 0.7;
 }
@@ -449,6 +456,10 @@ body::before {
 .popup-heart:nth-child(1) { animation-delay: 0s; }
 .popup-heart:nth-child(2) { animation-delay: 0.3s; }
 .popup-heart:nth-child(3) { animation-delay: 0.6s; }
+
+.special-poem .popup-content {
+  background: linear-gradient(135deg, --soft-pink, --cream);
+}
 
 /* ===================================
    BOTÓN VOLVER
@@ -460,22 +471,26 @@ body::before {
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid rgba(255, 107, 157, 0.4);
   padding: 1rem 2rem;
-  border-radius: 50px;
+  border-radius: 100px;
   font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--deep-pink);
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 100;
   box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  letter-spacing: 0.1em;
   font-weight: bold;
 }
 
 .back-btn:hover {
-  background: white;
-  border-color: var(--romantic-pink);
+  background: rgba(255, 0, 128, 0.3);
+  border-color: var(--neon-pink);
   transform: translateX(-5px) scale(1.05);
-  box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 0, 128, 0.2),
+    var(--glow-pink);
+  color: #fff;
 }
 
 /* ===================================
@@ -542,6 +557,16 @@ body::before {
     transform: scale(1) rotate(0deg);
     opacity: 1;
   }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 /* ===================================
