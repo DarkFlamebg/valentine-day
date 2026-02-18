@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Pensamientos · Para Ti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Crimson+Pro:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/pensamientos.css" />
+</head>
+<body>
+  <!-- Pétalos generados por JS -->
+  <script>
+    const colors = ['#e8a0ae','#c8526a','#f5d0a9','#e8c97a','#f9e4e8'];
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 8 + Math.random() * 10;
+      p.style.cssText = `
+        left: ${Math.random() * 100}vw;
+        width: ${size}px;
+        height: ${size * 1.35}px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        animation-duration: ${7 + Math.random() * 12}s;
+        animation-delay: ${Math.random() * 10}s;
+        border-radius: ${Math.random() > .5 ? '50% 0 50% 0' : '0 50% 0 50%'};
+        opacity: 0;
+      `;
+      document.body.appendChild(p);
+    }
+  </script>
+
+    <div class="page">
+        <a href="index.html" class="btn-back">← Volver</a>
+
+        <header>
+            <span class="eyebrow">Mis pensamientos</span>
+            <h1>Lo Que Siento<br><em>Por Ti</em></h1>
+            <div class="divider"></div>
+        </header>
+
+    <div class="thoughts-grid">
+
+        <div class="thought-card">
+            <span class="card-icon">💭</span>
+            <h3>Tu Sonrisa</h3>
+            <p>No es solo que ilumine. Es que cambia la temperatura del momento. Cuando sonríes, algo dentro de mí se acomoda, como si todo encontrara su lugar.</p>
+        </div>
+
+        <div class="thought-card">
+            <span class="card-icon">🌟</span>
+            <h3>Tu Presencia</h3>
+            <p>Hay personas que ocupan espacio. Tú ocupas calma. Incluso en silencio, haces que el mundo se sienta menos caótico.</p>
+        </div>
+
+        <div class="thought-card">
+            <span class="card-icon">❤️</span>
+            <h3>Lo Que Me Haces Sentir</h3>
+            <p>No es un amor que grita. Es uno que se queda. Que aparece en los detalles simples y se vuelve más fuerte cuando intento ignorarlo.</p>
+        </div>
+
+        <div class="thought-card">
+            <span class="card-icon">🌹</span>
+            <h3>Lo Que No Digo</h3>
+            <p>A veces aparento tranquilidad, pero pienso más de lo que demuestro. Me pregunto cuánto durará esto, cuánto nos permitirá el tiempo… y aun así me quedo.</p>
+        </div>
+
+        <div class="thought-card">
+            <span class="card-icon">🌙</span>
+            <h3>Las Noches</h3>
+            <p>Antes de dormir, vuelvo a nuestras conversaciones. A lo que dijimos… y a lo que no. Eres ese pensamiento que no necesita esfuerzo para quedarse.</p>
+        </div>
+
+        <div class="thought-card">
+            <span class="card-icon">✨</span>
+            <h3>Algo Distinto</h3>
+            <p>No eres solo alguien que me gusta. Hay algo distinto en cómo me haces pensar, en cómo alteras mi calma sin romperla. Y eso no pasa con cualquiera.</p>
+        </div>
+
+    </div>
+        <div class="signature">
+            <p>Escrito sin ruido, pero con verdad.</p>
+            <span class="heart-line">♥</span>
+            <p>Y aunque el tiempo cambie las cosas, lo que fue sincero nunca desaparece.</p>
+        </div>
+    </div>
+
+
+</body>
+</html>

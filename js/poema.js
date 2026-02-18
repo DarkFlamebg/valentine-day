@@ -121,6 +121,14 @@ const poemas = {
       <p class="verse">recuerda que hubo alguien</p>
       <p class="verse">que te miró como quien encuentra algo</p>
       <p class="verse">que no se repite dos veces en la vida.</p>
+      <br>
+      <p class="verse">quiero que al menos te quede la certeza</p>
+      <p class="verse">de que hubo un tiempo</p>
+      <p class="verse">en el que fuiste hogar</p>
+      <p class="verse">sin saberlo.</p>
+      <br>
+      <p class="verse">Y yo fui feliz</p>
+      <p class="verse">solo por haberte encontrado.</p>
     `
   }
 

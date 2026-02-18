@@ -1,11 +1,14 @@
 /* ===================================
    RESET Y BASE
    =================================== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
 *, *::after, *::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   /* Paleta Neón Romántica */
   --neon-pink: #ff0080;
@@ -30,6 +33,7 @@
   --glow-blue: 0 0 20px rgba(0, 212, 255, 0.6),
                0 0 40px rgba(0, 212, 255, 0.4);
 }
+
 body {
   font-family: 'Space Mono', monospace;
   min-height: 100vh;
@@ -42,6 +46,8 @@ body {
   color: #fff;
   position: relative;
 }
+
+/* Grid de fondo cyberpunk */
 body::before {
   content: '';
   position: fixed;
@@ -56,6 +62,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
 }
+
+/* Partículas flotantes de fondo */
 body::after {
   content: '';
   position: fixed;
@@ -65,8 +73,6 @@ body::after {
   height: 100%;
   background: 
     radial-gradient(circle at 20% 30%, rgba(255, 0, 128, 0.1) 0%, transparent 3%),
-    radial-gradient(circle at 100% 70%, rgba(191, 0, 255, 0.1) 0%, transparent 3%),
-    radial-gradient(circle at 80% 70%, rgba(191, 0, 255, 0.1) 0%, transparent 3%),
     radial-gradient(circle at 80% 70%, rgba(191, 0, 255, 0.1) 0%, transparent 3%),
     radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 3%),
     radial-gradient(circle at 70% 20%, rgba(217, 70, 255, 0.08) 0%, transparent 3%);
@@ -74,6 +80,7 @@ body::after {
   pointer-events: none;
   z-index: 0;
 }
+
 @keyframes particleFloat {
   0%, 100% { transform: translate(0, 0); opacity: 0.6; }
   33% { transform: translate(20px, -30px); opacity: 0.8; }
@@ -92,6 +99,7 @@ body::after {
   z-index: 1;
   pointer-events: none;
   opacity: 1;
+  filter: drop-shadow(var(--glow-pink));
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -109,7 +117,8 @@ body::after {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
   padding: 2rem;
 }
@@ -127,9 +136,11 @@ body::after {
   z-index: 20;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
+  position: relative;
 }
+
 /* Efecto de escaneo cyberpunk */
 .hero-ui::before {
   content: '';
@@ -153,20 +164,69 @@ body::after {
 }
 
 .title {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 900;
   margin-bottom: 2rem;
-  background: linear-gradient(45deg, #ff69b4, #ff6b9d, #c44569);
+  background: linear-gradient(
+    135deg,
+    var(--neon-pink) 0%,
+    var(--neon-purple) 25%,
+    var(--neon-blue) 50%,
+    var(--neon-violet) 75%,
+    var(--electric-pink) 100%
+  );
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: titleGlow 3s ease-in-out infinite;
+  animation: neonPulse 4s ease-in-out infinite, gradientShift 8s ease infinite;
+  filter: drop-shadow(var(--glow-pink));
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.title::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(15px);
+  opacity: 0.7;
+  z-index: -1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% { 
+    filter: drop-shadow(var(--glow-pink));
+  }
+  50% { 
+    filter: drop-shadow(var(--glow-purple));
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
 }
 
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
@@ -182,16 +242,17 @@ body::after {
   border: 2px solid var(--neon-pink);
   background: rgba(255, 0, 128, 0.05);
   color: #FFFFFF;
-  border-radius: 50px;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
-  min-width: 280px;
+  min-width: 320px;
   overflow: hidden;
   box-shadow: 
     inset 0 0 20px rgba(255, 0, 128, 0.1),
     0 0 20px rgba(255, 0, 128, 0.3);
 }
+
 .hero-ui button::before,
 .btn::before {
   content: '';
@@ -208,10 +269,12 @@ body::after {
   );
   transition: left 0.5s ease;
 }
+
 .hero-ui button:hover::before,
 .btn:hover::before {
   left: 100%;
 }
+
 .hero-ui button:hover,
 .btn:hover {
   background: rgba(255, 0, 128, 0.2);
@@ -231,7 +294,7 @@ body::after {
 
 .btn-poems {
   border-color: var(--neon-purple);
-  color: var(--neon-purple);
+  color: #FFFFFF;
   box-shadow: 
     inset 0 0 20px rgba(191, 0, 255, 0.1),
     0 0 20px rgba(191, 0, 255, 0.3);
@@ -244,9 +307,10 @@ body::after {
     inset 0 0 30px rgba(191, 0, 255, 0.2),
     var(--glow-purple),
     0 10px 40px rgba(191, 0, 255, 0.4);
+  color: #fff;
 }
 
-.btn-poems {
+.btn-special {
   border-color: var(--neon-blue);
   background: linear-gradient(
     135deg,
@@ -290,7 +354,6 @@ body::after {
   animation: none;
 }
 
-
 /* ===================================
    BOTÓN DE REGRESO
    =================================== */
@@ -298,15 +361,15 @@ body::after {
   position: absolute;
   top: 2rem;
   left: 2rem;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 700;
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.1em;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border-radius: 50px;
+  border: 2px solid var(--neon-pink);
+  background: rgba(255, 0, 128, 0.05);
+  color: var(--neon-pink);
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
@@ -327,18 +390,92 @@ body::after {
 }
 
 /* ===================================
+   SECCIÓN DE POEMA
+   =================================== */
+#poem {
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#poem > button[data-target="hero"] {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  min-width: auto;
+}
+
+#poem > button[data-target="hero"]:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-5px);
+}
+
+.poem-container {
+  max-width: 800px;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.poem-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ff69b4;
+}
+
+.poem-verses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.poem-verses span {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.poem-verses span:nth-child(1) { animation-delay: 0.2s; }
+.poem-verses span:nth-child(2) { animation-delay: 0.4s; }
+.poem-verses span:nth-child(3) { animation-delay: 0.6s; }
+.poem-verses span:nth-child(4) { animation-delay: 0.8s; }
+.poem-verses span:nth-child(5) { animation-delay: 1s; }
+.poem-verses span:nth-child(6) { animation-delay: 1.2s; }
+.poem-verses span:nth-child(7) { animation-delay: 1.4s; }
+.poem-verses span:nth-child(8) { animation-delay: 1.6s; }
+.poem-verses span:nth-child(9) { animation-delay: 1.8s; }
+.poem-verses span:nth-child(10) { animation-delay: 2s; }
+.poem-verses span:nth-child(11) { animation-delay: 2.2s; }
+
+/* ===================================
    SECCIÓN DE PENSAMIENTOS
    =================================== */
 .thoughts-container {
   max-width: 1400px;
   width: 100%;
   position: relative;
+  padding: 0 1rem;
 }
 
 .thoughts-container h2 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 900;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   text-align: center;
   background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue));
   background-size: 200% 200%;
@@ -349,21 +486,23 @@ body::after {
   filter: drop-shadow(var(--glow-pink));
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .thoughts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0;
+  max-width: 100%;
 }
 
 .thought-card {
-  padding: 2.5rem;
-  background: rgba(10, 0, 21, 0.6);
+  padding: 2rem 1.5rem;
+  background: rgba(10, 0, 21, 0.8);
   backdrop-filter: blur(20px);
   border: 2px solid transparent;
-  border-radius: 0;
+  border-radius: 8px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
@@ -371,27 +510,24 @@ body::after {
   overflow: hidden;
 }
 
-.thought-card:nth-child(1) { animation-delay: 0.1s; }
-.thought-card:nth-child(2) { animation-delay: 0.2s; }
-.thought-card:nth-child(3) { animation-delay: 0.3s; }
-.thought-card:nth-child(4) { animation-delay: 0.4s; }
-
-.thought-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
-}
-
-.thought-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #ff69b4;
-}
-
-.thought-card p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+.thought-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid;
+  border-image: linear-gradient(
+    135deg,
+    var(--neon-pink),
+    var(--neon-purple),
+    var(--neon-blue),
+    var(--neon-pink)
+  ) 1;
+  border-radius: 8px;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
 }
 
 .thought-card::after {
@@ -411,13 +547,68 @@ body::after {
   transition: all 0.6s ease;
   opacity: 0;
 }
+
+.thought-card:nth-child(1) { animation-delay: 0.1s; }
+.thought-card:nth-child(2) { animation-delay: 0.2s; }
+.thought-card:nth-child(3) { animation-delay: 0.3s; }
+.thought-card:nth-child(4) { animation-delay: 0.4s; }
+
+.thought-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  background: rgba(10, 0, 21, 0.9);
+  box-shadow: 
+    0 0 30px rgba(255, 0, 128, 0.4),
+    0 0 60px rgba(191, 0, 255, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.thought-card:hover::before {
+  opacity: 1;
+  filter: drop-shadow(var(--glow-pink));
+}
+
+.thought-card:hover::after {
+  opacity: 1;
+  animation: shimmer 2s ease infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.thought-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--neon-pink), var(--electric-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  line-height: 1.3;
+}
+
+.thought-card p {
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 /* ===================================
    ANIMACIONES
    =================================== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -428,20 +619,23 @@ body::after {
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-60px) rotateY(-10deg);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) rotateY(0deg);
   }
 }
 
 @keyframes titleGlow {
   0%, 100% {
-    text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    filter: drop-shadow(var(--glow-pink));
   }
-  50% {
-    text-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
+  33% {
+    filter: drop-shadow(var(--glow-purple));
+  }
+  66% {
+    filter: drop-shadow(var(--glow-blue));
   }
 }
 
@@ -456,7 +650,7 @@ body::after {
   .btn {
     padding: 1rem 2rem;
     font-size: 0.95rem;
-    min-width: 280px;
+    min-width: 260px;
   }
   
   .poem-container {
@@ -465,28 +659,37 @@ body::after {
   
   .poem-container h2,
   .thoughts-container h2 {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin-bottom: 2.5rem;
   }
   
   .poem-verses span {
     font-size: 1.1rem;
   }
   
+  .thoughts-container {
+    padding: 0 0.5rem;
+  }
+  
   .thoughts-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+    padding: 0;
   }
   
   .thought-card {
-    padding: 2rem;
+    padding: 1.8rem 1.3rem;
+    border-radius: 8px;
   }
   
   .thought-card h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    margin-bottom: 0.8rem;
   }
   
   .thought-card p {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    line-height: 1.6;
   }
   
   .btn-back {
@@ -495,30 +698,82 @@ body::after {
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
   }
+  
+  /* Ajustar sección para que no se corte */
+  #thoughts {
+    padding: 5rem 1rem 2rem;
+    overflow-y: auto;
+  }
+  
+  #thoughts .thoughts-container {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 1.5rem;
   }
   
   .btn {
-    min-width: 240px;
-    padding: 0.9rem 1.8rem;
-    font-size: 0.9rem;
+    min-width: 220px;
+    padding: 0.9rem 1.6rem;
+    font-size: 0.85rem;
   }
   
   .poem-container h2,
   .thoughts-container h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
   }
   
   .thought-card {
-    padding: 1.5rem;
+    padding: 1.5rem 1.2rem;
   }
   
   .thought-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.7rem;
+  }
+  
+  .thought-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .btn-back {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Más espacio vertical en móviles pequeños */
+  #thoughts {
+    padding: 4.5rem 0.8rem 2rem;
+  }
+  
+  .thoughts-grid {
+    gap: 1.2rem;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .thoughts-container h2 {
+    font-size: 1.4rem;
+  }
+  
+  .thought-card {
+    padding: 1.2rem 1rem;
+  }
+  
+  .thought-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .thought-card p {
+    font-size: 0.85rem;
   }
 }
