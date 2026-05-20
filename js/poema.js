@@ -229,6 +229,12 @@ function createPopupHearts() {
 poemCards.forEach(card => {
   card.addEventListener('click', () => {
     const poemId = card.getAttribute('data-poem');
+    
+    if (poemId === '7') {
+      window.location.href = 'cuando-dejemos-de-hablar.html';
+      return;
+    }
+    
     openPoem(poemId);
     
     // Efecto de partículas al hacer click
